@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
-using JoyCon;
 
 namespace CombiCon
 {
@@ -12,39 +11,42 @@ namespace CombiCon
 
         static void Main(string[] args)
         {
-            JoyconManager jcMan = new JoyconManager();
-            jcMan.RefreshJoyConList();
-            Console.WriteLine(jcMan.JoyCons.ToString());
-            Joycon j = jcMan.JoyCons[0];
-            Console.WriteLine(jcMan.JoyCons.Count);
+            JoyconManager jcm = new JoyconManager();
+            jcm.Awake();
+            jcm.Start();
+            List<Joycon> js = jcm.j;
+            Console.WriteLine(js.Count);
+            Joycon j = js[0];
             DateTime oldtime = DateTime.Now;
             DateTime newtime = DateTime.Now;
+
             double tick = 0;
+            
             while (true)
             {
+
                 newtime = DateTime.Now;
                 TimeSpan difference = newtime - oldtime;
                 j.Update(difference);
 
-                //poll for the position along the x-axis
-                _position = j.GetAccel();
+                ////poll for the position along the x-axis
+                //_position = j.GetAccel();
 
-                if (j.GetButton(Joycon.Button.SHOULDER_2))
-                {
-                    Console.WriteLine(string.Format("Gyro x: {0:N} Gyro y: {1:N} Gyro z: {2:N}", j.GetGyro().X, j.GetGyro().Y, j.GetGyro().Z));
-                }
+                //Quaternion test = j.GetVector();
 
-                //write the current position between -1.0 and 1.0 along the x-axis
-                if (j.GetButton(Joycon.Button.STICK))
-                {
-                    if (Math.Floor(_position.X * 10) != tick)
-                    {
-                        j.SetRumble(160, 320, 0.2f, 5);
-                        tick = Math.Floor(_position.X * 10);
-                        Console.WriteLine("Current position:  " + tick);
-                    }
-                    
-                }
+                Console.WriteLine(j.GetAccel());
+
+                ////write the current position between -1.0 and 1.0 along the x-axis
+                //if (j.GetButton(Joycon.Button.SHOULDER_2))
+                //{
+                //    if (Math.Floor(_position.X * 5) < tick-1 || Math.Floor(_position.X * 5) > tick+1)
+                //    {
+                //        j.SetRumble(160, 320, 0.2f, 5);
+                //        tick = Math.Floor(_position.X * 5);
+                //        Console.WriteLine("Current position:  " + tick);
+                //    }
+
+                //}
 
                 oldtime = newtime;
             }

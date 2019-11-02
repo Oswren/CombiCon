@@ -12,7 +12,6 @@
           "HidApiAdapter": "1.0.5",
           "HidApiNet": "1.0.7",
           "HidSharp": "2.1.0",
-          "JoyConLib": "0.0.1.5",
           "LibUsbDotNet": "2.2.29"
         },
         "runtime": {
@@ -62,18 +61,6 @@
           }
         }
       },
-      "JoyConLib/0.0.1.5": {
-        "dependencies": {
-          "MathFloat": "1.0.1",
-          "System.Numerics.Vectors": "4.4.0"
-        },
-        "runtime": {
-          "lib/netstandard2.0/JoyConLib.dll": {
-            "assemblyVersion": "0.0.1.5",
-            "fileVersion": "0.0.1.5"
-          }
-        }
-      },
       "LibUsbDotNet/2.2.29": {
         "dependencies": {
           "Microsoft.Win32.Registry": "4.5.0"
@@ -85,14 +72,6 @@
           }
         }
       },
-      "MathFloat/1.0.1": {
-        "runtime": {
-          "lib/net20/MathFloat.dll": {
-            "assemblyVersion": "1.0.1.0",
-            "fileVersion": "1.0.1.0"
-          }
-        }
-      },
       "Microsoft.NETCore.Platforms/2.0.0": {},
       "Microsoft.Win32.Registry/4.5.0": {
         "dependencies": {
@@ -100,7 +79,6 @@
           "System.Security.Principal.Windows": "4.5.0"
         }
       },
-      "System.Numerics.Vectors/4.4.0": {},
       "System.Security.AccessControl/4.5.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "2.0.0",
@@ -155,26 +133,12 @@
       "path": "hidsharp/2.1.0",
       "hashPath": "hidsharp.2.1.0.nupkg.sha512"
     },
-    "JoyConLib/0.0.1.5": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-3uxy0E1HuH6z5hhOz837cQZzOv3OX0cWZnBvtR75egwsCCFz3YTpSuW0iQaMdrVY3+Lorg6mWba67XE4zDM8aw==",
-      "path": "joyconlib/0.0.1.5",
-      "hashPath": "joyconlib.0.0.1.5.nupkg.sha512"
-    },
     "LibUsbDotNet/2.2.29": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-kYXcaTDhoJlZP7yuh3yuBTYQxzw1p+QXpJnGRkdtGMq7Vy7NTD/DzBLnZR72gL7HEQUz+mpyRpq+ZOySwQb4Zw==",
       "path": "libusbdotnet/2.2.29",
       "hashPath": "libusbdotnet.2.2.29.nupkg.sha512"
-    },
-    "MathFloat/1.0.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-3yCZQoj6yntI1mljFbBBE3LWdKeNOxcC4GHL3jYtSJ9YPLfG/wzkz04bZO8kV0EmMgYTTDTqTVsZSYD97d6tbg==",
-      "path": "mathfloat/1.0.1",
-      "hashPath": "mathfloat.1.0.1.nupkg.sha512"
     },
     "Microsoft.NETCore.Platforms/2.0.0": {
       "type": "package",
@@ -189,13 +153,6 @@
       "sha512": "sha512-+FWlwd//+Tt56316p00hVePBCouXyEzT86Jb3+AuRotTND0IYn0OO3obs1gnQEs/txEnt+rF2JBGLItTG+Be6A==",
       "path": "microsoft.win32.registry/4.5.0",
       "hashPath": "microsoft.win32.registry.4.5.0.nupkg.sha512"
-    },
-    "System.Numerics.Vectors/4.4.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-UiLzLW+Lw6HLed1Hcg+8jSRttrbuXv7DANVj0DkL9g6EnnzbL75EB7EWsw5uRbhxd/4YdG8li5XizGWepmG3PQ==",
-      "path": "system.numerics.vectors/4.4.0",
-      "hashPath": "system.numerics.vectors.4.4.0.nupkg.sha512"
     },
     "System.Security.AccessControl/4.5.0": {
       "type": "package",

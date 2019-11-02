@@ -5,3 +5,5 @@
 /.vs/CombiCon
 /CombiCon/obj
 /CombiCon/bin
+/CombiCon.Tests/bin
+/CombiCon.Tests/obj

@@ -375,7 +375,7 @@ public class Joycon
 				if (rumble_obj.t < 0) {
 					rumble_obj.set_vals (160, 320, 0, 0);
 				} else {
-					rumble_obj.t -= ts.Seconds;
+					rumble_obj.t -= ts.Milliseconds/1000f;
 				}
 			}
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
+using System.Threading;
 
 namespace CombiCon
 {
@@ -11,6 +12,7 @@ namespace CombiCon
 
         static void Main(string[] args)
         {
+
             JoyconManager jcm = new JoyconManager();
             jcm.Awake();
             jcm.Start();
@@ -18,10 +20,13 @@ namespace CombiCon
             Console.WriteLine(js.Count);
             Joycon j = js[0];
             DateTime oldtime = DateTime.Now;
-            DateTime newtime = DateTime.Now;
+            DateTime newtime;
+            int tick = 20;
+            int newTick;
 
-            double tick = 0;
-            
+            int[] sequence = new int[] { 2, -4, 0 };
+            var sequencePosition = 0;
+
             while (true)
             {
 
@@ -29,26 +34,35 @@ namespace CombiCon
                 TimeSpan difference = newtime - oldtime;
                 j.Update(difference);
 
-                ////poll for the position along the x-axis
-                //_position = j.GetAccel();
 
-                //Quaternion test = j.GetVector();
+                _position = j.GetAccel();
 
-                Console.WriteLine(j.GetAccel());
+                newTick = (int)Math.Floor(_position.X * 4);
 
-                ////write the current position between -1.0 and 1.0 along the x-axis
-                //if (j.GetButton(Joycon.Button.SHOULDER_2))
-                //{
-                //    if (Math.Floor(_position.X * 5) < tick-1 || Math.Floor(_position.X * 5) > tick+1)
-                //    {
-                //        j.SetRumble(160, 320, 0.2f, 5);
-                //        tick = Math.Floor(_position.X * 5);
-                //        Console.WriteLine("Current position:  " + tick);
-                //    }
-
-                //}
+                if (newTick % 2 == 0 && tick != newTick)
+                {
+                    tick = newTick;
+                    if (newTick == sequence[sequencePosition])
+                    {
+                        sequencePosition++;
+                        j.SetRumble(160, 180, 1.0f, 100);
+                        if (sequencePosition == sequence.Length)
+                        {
+                            Console.WriteLine("Open!");
+                            Console.ReadKey();
+                            break;
+                        }
+                        Console.WriteLine("Hit!");
+                    }
+                    else
+                    {
+                        j.SetRumble(160, 180, 0.6f, 1);
+                        Console.WriteLine(newTick);
+                    }
+                }
 
                 oldtime = newtime;
+                Thread.Sleep(10);
             }
         }
     }

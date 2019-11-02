@@ -19,6 +19,7 @@ namespace CombiCon
             Console.WriteLine(jcMan.JoyCons.Count);
             DateTime oldtime = DateTime.Now;
             DateTime newtime = DateTime.Now;
+            double tick = 0;
             while (true)
             {
                 newtime = DateTime.Now;
@@ -34,9 +35,15 @@ namespace CombiCon
                 }
 
                 //write the current position between -1.0 and 1.0 along the x-axis
-                if (j.GetButton(Joycon.Button.SHOULDER_1))
+                if (j.GetButton(Joycon.Button.STICK))
                 {
-                    Console.WriteLine("Current position:  " + _position.X);
+                    if (Math.Floor(_position.X * 10) != tick)
+                    {
+                        j.SetRumble(160, 320, 0.2f, 5);
+                        tick = Math.Floor(_position.X * 10);
+                        Console.WriteLine("Current position:  " + tick);
+                    }
+                    
                 }
 
                 oldtime = newtime;

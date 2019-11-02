@@ -21,7 +21,8 @@ namespace CombiCon
             int tick = 20;
             int newTick;
 
-            int[] s2 = new int[] { 2, -4, 0 };
+            int[] sequence = new int[] { 2, -4, 0 };
+            var sequencePosition = 0;
 
             while (true)
             {
@@ -36,9 +37,16 @@ namespace CombiCon
                 if (newTick % 2 == 0 && tick != newTick)
                 {
                     tick = newTick;
-                    if (newTick == -2)
+                    if (newTick == sequence[sequencePosition])
                     {
-                        j.SetRumble(200, 200, 0.6f, 3);
+                        sequencePosition++;
+                        j.SetRumble(160, 180, 1.0f, 3);
+                        if (sequencePosition == sequence.Length)
+                        {
+                            Console.WriteLine("Open!");
+                            Console.ReadKey();
+                            break;
+                        }
                         Console.WriteLine("Hit!");
                     }
                     else

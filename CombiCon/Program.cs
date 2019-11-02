@@ -7,17 +7,10 @@ namespace CombiCon
 {
     class Program
     {
-        private static List<Joycon> joycons;
-
-        // Values made available via Unity
-        public float[] stick;
-        public static Vector3 gyro;
-        public static Vector3 accel;
+        public static Vector3 _position;
         public static int jc_ind = 0;
-        public static Quaternion orientation;
 
         static void Main(string[] args)
-
         {
             JoyconManager jcMan = new JoyconManager();
             jcMan.RefreshJoyConList();
@@ -31,18 +24,23 @@ namespace CombiCon
                 newtime = DateTime.Now;
                 TimeSpan difference = newtime - oldtime;
                 j.Update(difference);
-                if (j.GetButtonDown(Joycon.Button.SHOULDER_2))
+
+                //poll for the position along the x-axis
+                _position = j.GetAccel();
+
+                if (j.GetButton(Joycon.Button.SHOULDER_2))
                 {
-                    Console.WriteLine("Shoulder pressed");
+                    Console.WriteLine(string.Format("Gyro x: {0:N} Gyro y: {1:N} Gyro z: {2:N}", j.GetGyro().X, j.GetGyro().Y, j.GetGyro().Z));
                 }
-                if (j.GetButtonDown(Joycon.Button.DPAD_LEFT))
+
+                //write the current position between -1.0 and 1.0 along the x-axis
+                if (j.GetButton(Joycon.Button.SHOULDER_1))
                 {
-                    Console.WriteLine("DPAD Left pressed");
+                    Console.WriteLine("Current position:  " + _position.X);
                 }
-                Console.WriteLine(string.Format("Gyro x: {0:N} Gyro y: {1:N} Gyro z: {2:N}", j.GetGyro().X, j.GetGyro().Y, j.GetGyro().Z));
+
                 oldtime = newtime;
             }
         }
     }
-    
 }

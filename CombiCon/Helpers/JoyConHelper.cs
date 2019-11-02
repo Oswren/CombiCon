@@ -40,7 +40,6 @@ namespace CombiCon.Helpers
         public Vector3 PollJoyconForDirection()
         {
             return Vector3.Transform(new Vector3(1, 1, 1), PollJoyconForVector());
-         
         }
 
         public bool PollJoyconForButton(Joycon.Button buttonPressed)

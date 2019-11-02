@@ -27,7 +27,7 @@ namespace CombiCon
                 {
                     if (item.Equals(newTick))
                     {
-                        _helper.VibrateJoycon(1.0f, 100);
+                        _helper.VibrateJoycon(0.3f, 100);
                     }
                 }
 

@@ -22,10 +22,12 @@ namespace CombiCon
             DateTime oldtime = DateTime.Now;
             DateTime newtime;
             int tick = 20;
-            int newTick;
+            Vector3 newTick;
 
-            int[] sequence = new int[] { 2, -4, 0 };
+            int[] sequence = { 2, -4, 0 };
             var sequencePosition = 0;
+
+            List<Vector3> newSeq = new List<Vector3>();
 
             while (true)
             {
@@ -34,34 +36,52 @@ namespace CombiCon
                 TimeSpan difference = newtime - oldtime;
                 j.Update(difference);
 
-                _position = j.GetAccel();
+                Console.WriteLine(Vector3.Transform(new Vector3(1, 1, 1), j.GetVector()).Z);
 
-                newTick = (int)Math.Floor(_position.X * 4);
+                _position = Vector3.Transform(new Vector3(1, 1, 1), j.GetVector());
 
-                if (newTick % 2 == 0 && tick != newTick)
+                newTick = new Vector3( (int)Math.Floor(_position.X * 4), (int)Math.Floor(_position.Y * 4), (int)Math.Floor(_position.Z * 4));
+
+                foreach (var item in newSeq)
                 {
-                    tick = newTick;
-                    if (newTick == sequence[sequencePosition])
+                    if (item.Equals(newTick))
                     {
-                        sequencePosition++;
                         j.SetRumble(160, 180, 1.0f, 100);
-                        if (sequencePosition == sequence.Length)
-                        {
-                            Console.WriteLine("Open!");
-                            Console.ReadKey();
-                            break;
-                        }
-                        Console.WriteLine("Hit!");
-                    }
-                    else
-                    {
-                        j.SetRumble(160, 180, 0.1f, 1);
-                        Console.WriteLine(newTick);
                     }
                 }
 
+                if (j.GetButtonDown(Joycon.Button.SHOULDER_2))
+                {
+                    Console.WriteLine(newTick.ToString());
+                    newSeq.Add(newTick);
+                }
+
+              
+
+                //if (newTick % 2 == 0 && tick != newTick)
+                //{
+                //    tick = newTick;
+                //    if (newTick == sequence[sequencePosition])
+                //    {
+                //        sequencePosition++;
+                //        j.SetRumble(160, 180, 1.0f, 100);
+                //        if (sequencePosition == sequence.Length)
+                //        {
+                //            Console.WriteLine("Open!");
+                //            Console.ReadKey();
+                //            break;
+                //        }
+                //        Console.WriteLine("Hit!");
+                //    }
+                //    else
+                //    {
+                //        j.SetRumble(160, 180, 0.1f, 1);
+                //        Console.WriteLine(newTick);
+                //    }
+                //}
+
                 oldtime = newtime;
-                Thread.Sleep(100);
+                Thread.Sleep(10);
             }
         }
     }

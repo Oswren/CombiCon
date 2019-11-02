@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Plotter.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="JoyConLib" Version="0.0.1.5" />
     <PackageReference Include="HidApiNet" Version="1.0.7" />
     <PackageReference Include="HidApiAdapter" Version="1.0.5" />

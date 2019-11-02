@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Numerics;
 
-namespace CombiCon.Readers
+namespace CombiCon.Helpers
 {
-    class JoyconReader
+    class JoyconHelper
     {
         public Joycon CONTROLLER;
 
@@ -13,10 +13,16 @@ namespace CombiCon.Readers
         private DateTime _newtime;
         private TimeSpan _timeDifference;
 
-        public JoyconReader()
+        public JoyconHelper()
         {
             _manager = new JoyconManager();
             InitialiseJoycon();
+        }
+
+        public void VibrateJoycon(float intensity, int milliseconds)
+        {
+            PollJoycon();
+            CONTROLLER.SetRumble(160, 180, intensity, milliseconds);
         }
 
         public Vector3 PollJoyconForTilt()
@@ -29,6 +35,12 @@ namespace CombiCon.Readers
         {
              PollJoycon();
              return CONTROLLER.GetVector();
+        }
+
+        public Vector3 PollJoyconForDirection()
+        {
+            return Vector3.Transform(new Vector3(1, 1, 1), PollJoyconForVector());
+         
         }
 
         public bool PollJoyconForButton(Joycon.Button buttonPressed)

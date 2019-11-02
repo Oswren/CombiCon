@@ -34,7 +34,6 @@ namespace CombiCon
                 TimeSpan difference = newtime - oldtime;
                 j.Update(difference);
 
-
                 _position = j.GetAccel();
 
                 newTick = (int)Math.Floor(_position.X * 4);
@@ -56,13 +55,13 @@ namespace CombiCon
                     }
                     else
                     {
-                        j.SetRumble(160, 180, 0.6f, 1);
+                        j.SetRumble(160, 180, 0.1f, 1);
                         Console.WriteLine(newTick);
                     }
                 }
 
                 oldtime = newtime;
-                Thread.Sleep(10);
+                Thread.Sleep(100);
             }
         }
     }

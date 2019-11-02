@@ -229,17 +229,20 @@ public class Joycon
     {
         return acc_g;
     }
-    //public Quaternion GetVector()
-    //{
-    //    Vector3 v1 = new Vector3(j_b.X, i_b.X, k_b.X);
-    //    Vector3 v2 = -(new Vector3(j_b.Z, i_b.Z, k_b.Z));
-    //    if (v2 != Vector3.Zero){
-		  //  return Quaternion.LookRotation(v1, v2);
-    //    }else{
-    //        return Quaternion.identity;
-    //    }
-    //}
-	public int Attach(byte leds_ = 0x0)
+    public Quaternion GetVector()
+    {
+        Vector3 v1 = new Vector3(j_b.X, i_b.X, k_b.X);
+        Vector3 v2 = -(new Vector3(j_b.Z, i_b.Z, k_b.Z));
+        if (v2 != Vector3.Zero)
+        {
+            return Quaternion.CreateFromYawPitchRoll(acc_g.X, acc_g.Y, acc_g.Z);
+        }
+        else
+        {
+            return Quaternion.Identity;
+        }
+    }
+    public int Attach(byte leds_ = 0x0)
     {
         state = state_.ATTACHED;
         byte[] a = { 0x0 };

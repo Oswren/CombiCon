@@ -14,29 +14,38 @@ namespace CombiCon
         {
             JoyconManager jcMan = new JoyconManager();
             jcMan.RefreshJoyConList();
-            Console.WriteLine(jcMan.JoyCons.ToString());
             Joycon j = jcMan.JoyCons[0];
             Console.WriteLine(jcMan.JoyCons.Count);
             DateTime oldtime = DateTime.Now;
             DateTime newtime = DateTime.Now;
+            int tick = 20;
+            int newTick;
+
+            int[] s2 = new int[] { 2, -4, 0 };
+
             while (true)
             {
                 newtime = DateTime.Now;
                 TimeSpan difference = newtime - oldtime;
                 j.Update(difference);
 
-                //poll for the position along the x-axis
                 _position = j.GetAccel();
 
-                if (j.GetButton(Joycon.Button.SHOULDER_2))
-                {
-                    Console.WriteLine(string.Format("Gyro x: {0:N} Gyro y: {1:N} Gyro z: {2:N}", j.GetGyro().X, j.GetGyro().Y, j.GetGyro().Z));
-                }
+                newTick = (int)Math.Floor(_position.X * 4);
 
-                //write the current position between -1.0 and 1.0 along the x-axis
-                if (j.GetButton(Joycon.Button.SHOULDER_1))
+                if (newTick % 2 == 0 && tick != newTick)
                 {
-                    Console.WriteLine("Current position:  " + _position.X);
+                    tick = newTick;
+                    if (newTick == -2)
+                    {
+                        j.SetRumble(200, 200, 0.6f, 3);
+                        Console.WriteLine("Hit!");
+                    }
+                    else
+                    {
+                        j.SetRumble(160, 180, 0.6f, 1);
+                        Console.WriteLine(newTick);
+                    }
                 }
 
                 oldtime = newtime;

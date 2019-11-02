@@ -17,7 +17,7 @@ namespace CombiCon
             Joycon j = jcMan.JoyCons[0];
             Console.WriteLine(jcMan.JoyCons.Count);
             DateTime oldtime = DateTime.Now;
-            DateTime newtime = DateTime.Now;
+            DateTime newtime;
             int tick = 20;
             int newTick;
 
@@ -55,7 +55,6 @@ namespace CombiCon
                         Console.WriteLine(newTick);
                     }
                 }
-
                 oldtime = newtime;
             }
         }

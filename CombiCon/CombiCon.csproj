@@ -17,6 +17,7 @@
     <PackageReference Include="HidSharp" Version="2.1.0" />
     <PackageReference Include="Hid.Net" Version="3.1.0" />
     <PackageReference Include="LibUsbDotNet" Version="2.2.29" />
+    <PackageReference Include="Twilio" Version="5.35.0" />
   </ItemGroup>
 
   <ItemGroup>

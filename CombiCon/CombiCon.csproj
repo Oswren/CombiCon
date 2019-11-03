@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <Folder Include="Compute\" />
+    <Folder Include="Accounts\" />
   </ItemGroup>
 
 </Project>

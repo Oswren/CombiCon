@@ -27,4 +27,12 @@
     <Folder Include="Accounts\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Compute\Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CombiConML.Model\CombiConML.Model.csproj" />
+  </ItemGroup>
+
 </Project>

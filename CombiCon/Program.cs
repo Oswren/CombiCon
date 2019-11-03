@@ -1,4 +1,5 @@
 ﻿using CombiCon.Communication;
+using CombiCon.Compute;
 using CombiCon.Helpers;
 using System;
 using System.Collections.Generic;
@@ -16,8 +17,8 @@ namespace CombiCon
 
         static void Main(string[] args)
         {
-            MakeNewPasscode();
-            CheckIfPasswordIsCorrect(_savedPass, _passAttempt);
+            datasetMaker m = new datasetMaker();
+            m.makeCsvFile();
         }
 
         private static void MakeNewPasscode()

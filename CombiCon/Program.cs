@@ -16,9 +16,73 @@ namespace CombiCon
 
         static void Main(string[] args)
         {
-            MakeNewPasscode();
-            CheckIfPasswordIsCorrect(_savedPass, _passAttempt);
+            while (true)
+            {
+                Console.WriteLine("Welcome to CombiCon login");
+                Console.WriteLine();
+                MenuLoop();
+            }
         }
+
+        private static void MenuLoop()
+        {
+            Console.WriteLine("Pick an option:");
+            Console.WriteLine("1 - Login with combination");
+            Console.WriteLine("2 - Login with shake");
+            Console.WriteLine("3 - Create an account");
+            Console.WriteLine("4 - Exit");
+            var choice = Console.ReadLine();
+
+            switch (choice)
+            {
+                case "1":
+                    ComboLoginMenu();
+                    break;
+                case "2":
+                    ShakeLoginMenu();
+                    break;
+                case "3":
+                    CreateAccountLoginMenu();
+                    break;
+                case "4":
+                    Environment.Exit(0);
+                    break;
+                default:
+                    Console.WriteLine("Invalid option");
+                    MenuLoop();
+                    break;
+            }
+        }
+
+        private static void ComboLoginMenu()
+        {
+            Console.WriteLine("Enter your username");
+            var username = Console.ReadLine();
+            //get user
+            //get passAttempt
+            //checkCombiPassword
+        }
+
+        private static void ShakeLoginMenu()
+        {
+            Console.WriteLine("Enter your username");
+            var username = Console.ReadLine();
+            //get user
+            //get passAttempt
+            //checkShakePassword
+        }
+
+        private static void CreateAccountLoginMenu()
+        {
+            Console.WriteLine("Enter a username");
+            var username = Console.ReadLine();
+
+
+            MakeNewPasscode();
+        }
+
+
+
 
         private static void MakeNewPasscode()
         {
@@ -40,4 +104,4 @@ namespace CombiCon
             }
         }
     }
-}   
+}

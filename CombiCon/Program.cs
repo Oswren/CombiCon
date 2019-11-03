@@ -1,4 +1,5 @@
-﻿using CombiCon.Communication;
+﻿using CombiCon.Accounts;
+using CombiCon.Communication;
 using CombiCon.Helpers;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,15 @@ namespace CombiCon
                 Console.WriteLine();
                 MenuLoop();
             }
+
+
+            Account user = new Account(_helper.GenerateSequence());
+            Thread.Sleep(20);
+            List<Vector3> passAttempt = _helper.GenerateSequence();
+            CheckIfPasswordIsCorrect(user, passAttempt);
+
+
+
         }
 
         private static void MenuLoop()
@@ -91,9 +101,9 @@ namespace CombiCon
             _passAttempt = _helper.GenerateSequence();
         }
 
-        private static void CheckIfPasswordIsCorrect(List<Vector3> savedPass, List<Vector3> passAttempt)
+        private static void CheckIfPasswordIsCorrect(Account user, List<Vector3> passAttempt)
         {
-            if (_helper.PasswordAttemptIsCorrect(savedPass, passAttempt))
+            if (user.GenerateSimilarity(passAttempt) <= 0.6)
             {
                 Console.WriteLine("Success! \n You have unlocked your imaginary safe.");
             }

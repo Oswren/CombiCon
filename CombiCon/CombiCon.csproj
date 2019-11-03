@@ -23,8 +23,8 @@
     <PackageReference Include="Twilio" Version="5.35.0" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Compute\" />
     <Folder Include="Accounts\" />
+    <Folder Include="Compute\Source\" />
   </ItemGroup>
 
   <ItemGroup>

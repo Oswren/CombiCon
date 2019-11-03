@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using System.Threading;
 
 namespace CombiCon.Compute
 {
@@ -20,37 +21,39 @@ namespace CombiCon.Compute
             _timer = new Stopwatch();
         }
 
-        public void makeCsvFile()
+        public void StoreNewPassword()
         {
-            _timer.Start();
-            float[] toCompare = new float[2];
-            float previous = _joyconHelper.PollJoyconForDirection().Y;
+            makeCsvFile("/Source/SavedPassword.csv");
+        }
 
+        public void readPasswordAttempt()
+        {
+            makeCsvFile("/Source/PasswordAttempt.csv");
+        }
+
+        public void makeCsvFile(string filePath)
+        {
+            _timer.Restart();
+            _timer.Start();
+            float previous = _joyconHelper.PollJoyconForDirection().Y;
+            _csv.Clear();
             _csv.AppendLine("previousHit, newHit, directionChanged?");
 
-            while (_timer.Elapsed < TimeSpan.FromSeconds(10))
+            while (_timer.Elapsed < TimeSpan.FromSeconds(2))
             {
-                toCompare[0] = previous;
-                toCompare[1] = _joyconHelper.PollJoyconForDirection().Y;
+                    var previousHit = previous;
 
-                var previousHit = previous;
+                    previous = _joyconHelper.PollJoyconForDirection().Y;
 
-                previous = _joyconHelper.PollJoyconForDirection().Y;
+                    var currentHit = _joyconHelper.PollJoyconForDirection().Y.ToString();
 
-                var currentHit = _joyconHelper.PollJoyconForDirection().Y.ToString();
-                var hasDirectionChanged = "0";
-
-                if (Math.Abs(toCompare[0] - toCompare[1]) > 0.6 || Math.Abs(toCompare[0] - toCompare[1]) < -0.6)
-                {
-                    hasDirectionChanged = "1";
-                }
-
-                var newLine = string.Format("{0},{1},{2}", previousHit, currentHit, hasDirectionChanged);
-                Console.WriteLine(newLine);
-                _csv.AppendLine(newLine);
+                    var newLine = string.Format("{0},{1},{2}", previousHit, currentHit, 0);
+                    Console.WriteLine(newLine);
+                    _csv.AppendLine(newLine);
+                Thread.Sleep(10);
             }
 
-            File.WriteAllText("/Source/newDataset.csv", _csv.ToString());
+            File.WriteAllText(filePath, _csv.ToString());
         }
     }
 }

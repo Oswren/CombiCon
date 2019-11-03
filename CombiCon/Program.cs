@@ -1,9 +1,11 @@
 ﻿using CombiCon.Accounts;
 using CombiCon.Communication;
+using CombiCon.Compute;
 using CombiCon.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Numerics;
+using System.Threading;
 
 namespace CombiCon
 {
@@ -12,12 +14,15 @@ namespace CombiCon
         private static PasscodeHelper _helper = new PasscodeHelper();
         private static MessageSender _messageSender;
         private static Dictionary<string, Account> _accounts = new Dictionary<string, Account>();
+        private static DatasetMaker _dm = new DatasetMaker();
 
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to CombiCon login");
             Console.WriteLine();
             MenuLoop();
+
+
         }
 
         private static void MenuLoop()
@@ -39,13 +44,7 @@ namespace CombiCon
                     ComboLoginMenu();
                     break;
                 case "2":
-                    //remove when implemented
-                    Console.WriteLine("Not Available Yet");
-                    MenuLoop();
-                    break;
-                    //-------
-
-                    ShakeLoginMenu();
+                    CreateShakeLogin();
                     break;
                 case "3":
                     CreateAccountLoginMenu();
@@ -92,36 +91,36 @@ namespace CombiCon
             CheckIfPasswordIsCorrect(user, passAttempt);
         }
 
-        private static void ShakeLoginMenu()
+        private static void CreateShakeLogin()
         {
-            Console.WriteLine();
-            Console.WriteLine("-----Log in with shake-----");
-            Console.WriteLine("Enter your username");
-            var username = Console.ReadLine();
-            //get user
-            var user = GetUser(username);
+            Thread.Sleep(1000);
+            _dm.StoreNewPassword();
 
-            if (user == null)
+            Console.WriteLine("Login Created.");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("Ready to sign in?: ");
+            Console.ReadLine();
+
+            Thread.Sleep(1000);
+            _dm.readPasswordAttempt();
+
+            ShakeRecogniser sr = new ShakeRecogniser();
+
+            if (sr.CompareAttemptWithActual())
             {
-                Console.WriteLine("Invalid user.");
-                Console.WriteLine("Try again? (Y/N)");
-                var tryAgain = Console.ReadLine();
-                switch (tryAgain)
-                {
-                    case "y":
-                        ComboLoginMenu();
-                        break;
-                    default:
-                        MenuLoop();
-                        break;
-                }
+                Console.WriteLine("Success!");
+                Environment.Exit(0);
+            }
+            else
+            {
+                Console.WriteLine("Oops! Sorry, your attempt was not similar enough.");
+                _messageSender = new MessageSender();
+                _messageSender.SendFailedLoginAttemptMessageToAll();
+                MenuLoop();
             }
 
-            //get passAttempt
-            List<Vector3> passAttempt = _helper.GenerateShakeSequence();
-
-            //check password
-            CheckIfShakePasswordIsCorrect(user, passAttempt);
+            MenuLoop();
         }
 
         private static void CreateAccountLoginMenu()

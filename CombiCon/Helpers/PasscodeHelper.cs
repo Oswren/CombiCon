@@ -59,5 +59,10 @@ namespace CombiCon.Helpers
 
             return isCorrect;
         }
+
+        internal List<Vector3> GenerateShakeSequence()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

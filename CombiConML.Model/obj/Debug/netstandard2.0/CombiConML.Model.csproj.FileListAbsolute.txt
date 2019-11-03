@@ -1,0 +1,9 @@
+C:\Source\bugfactory\CombiConML.Model\bin\Debug\netstandard2.0\MLModel.zip
+C:\Source\bugfactory\CombiConML.Model\bin\Debug\netstandard2.0\CombiConML.Model.deps.json
+C:\Source\bugfactory\CombiConML.Model\bin\Debug\netstandard2.0\CombiConML.Model.dll
+C:\Source\bugfactory\CombiConML.Model\bin\Debug\netstandard2.0\CombiConML.Model.pdb
+C:\Source\bugfactory\CombiConML.Model\obj\Debug\netstandard2.0\CombiConML.Model.csprojAssemblyReference.cache
+C:\Source\bugfactory\CombiConML.Model\obj\Debug\netstandard2.0\CombiConML.Model.AssemblyInfoInputs.cache
+C:\Source\bugfactory\CombiConML.Model\obj\Debug\netstandard2.0\CombiConML.Model.AssemblyInfo.cs
+C:\Source\bugfactory\CombiConML.Model\obj\Debug\netstandard2.0\CombiConML.Model.dll
+C:\Source\bugfactory\CombiConML.Model\obj\Debug\netstandard2.0\CombiConML.Model.pdb

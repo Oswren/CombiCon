@@ -1,4 +1,5 @@
-﻿using CombiCon.Helpers;
+﻿using CombiCon.Communication;
+using CombiCon.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Numerics;
@@ -19,13 +20,21 @@ namespace CombiCon
 
             double total_error = 0;
 
-			for (int i = 0; i < passcode1.Count; i++)
-			{
+            for (int i = 0; i < passcode1.Count; i++)
+            {
                 Vector3 delta = passcode2[i] - passcode1[i];
                 total_error += Math.Sqrt(Math.Pow(delta.X, 2) + Math.Pow(delta.Y, 2) + Math.Pow(delta.Z, 2));
-			}
+            }
 
-			Console.WriteLine(total_error);
+            if (Math.Round(total_error, 2) <= 0.60)
+            {
+                Console.WriteLine("Success! \n You have unlocked your imaginary safe.");
+            }
+            else
+            {
+                MessageSender sender = new MessageSender();
+                sender.SendMessageToAll("There has been a failed login attempt at :" + DateTime.Now.ToString() + " \n \n on device: " + System.Environment.MachineName.ToString());
+            } 
 		}
     }
 }   

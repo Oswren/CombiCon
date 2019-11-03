@@ -47,7 +47,7 @@ namespace CombiCon.Communication
         private string SendTextMessage(string targetNumber, string messageBody)
         {
             var message = MessageResource.Create(
-                body: "- \n \n \n" + messageBody,
+                body: "- \n \n" + messageBody,
                 from: new Twilio.Types.PhoneNumber("+441253530838"),
                 to: new Twilio.Types.PhoneNumber(targetNumber));
 

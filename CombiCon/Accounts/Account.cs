@@ -7,9 +7,11 @@ namespace CombiCon.Accounts
     public class Account
     {
         List<Vector3> _sequence;
+        String _username;
 
-        public Account(List<Vector3> seq)
+        public Account(String user, List<Vector3> seq)
         {
+            _username = user;
             _sequence = seq;
         }
 

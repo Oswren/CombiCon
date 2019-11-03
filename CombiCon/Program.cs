@@ -4,7 +4,6 @@ using CombiCon.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Numerics;
-using System.Threading;
 
 namespace CombiCon
 {
@@ -14,6 +13,7 @@ namespace CombiCon
         private static List<Vector3> _savedPass;
         private static List<Vector3> _passAttempt;
         private static MessageSender _messageSender;
+        private static Dictionary<String, Account> _accounts = new Dictionary<String, Account>();
 
         static void Main(string[] args)
         {
@@ -102,12 +102,20 @@ namespace CombiCon
 
         private static Account GetUser(string username)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _accounts[username];
+            }
+            catch (KeyNotFoundException e)
+            {
+                return null;
+            }
         }
 
         private static void AddUser(string username, List<Vector3> password)
         {
-            throw new NotImplementedException();
+            var user = new Account(password);
+            _accounts.Add(username, user);
         }
 
         private static void CheckIfPasswordIsCorrect(Account user, List<Vector3> passAttempt)

@@ -200,10 +200,6 @@ public class Joycon
     public void DebugPrint(String s, DebugType d)
     {
         if (debug_type == DebugType.NONE) return;
-        if (d == DebugType.ALL || d == debug_type || debug_type == DebugType.ALL)
-        {
-            Console.WriteLine(s);
-        }
     }
     public bool GetButtonDown(Button b)
     {
@@ -262,7 +258,6 @@ public class Joycon
         Subcommand(0x40, new byte[] { (imu_enabled ? (byte)0x1 : (byte)0x0) }, 1, true);
         Subcommand(0x3, new byte[] { 0x30 }, 1, true);
         Subcommand(0x48, new byte[] { 0x1 }, 1, true);
-        DebugPrint("Done with init.", DebugType.COMMS);
         return 0;
     }
     public void SetFilterCoeff(float a)
@@ -302,12 +297,7 @@ public class Joycon
             {
                 reports.Enqueue(new Report(raw_buf, System.DateTime.Now));
             }
-            if (ts_en == raw_buf[1])
-            {
-                DebugPrint(string.Format("Duplicate timestamp enqueued. TS: {0:X2}", ts_en), DebugType.THREADING);
-            }
             ts_en = raw_buf[1];
-            DebugPrint(string.Format("Enqueue. Bytes read: {0:D}. Timestamp: {1:X2}", ret, raw_buf[1]), DebugType.THREADING);
         }
         return ret;
     }
@@ -328,17 +318,14 @@ public class Joycon
             else if (attempts > 1000)
             {
                 state = state_.DROPPED;
-                DebugPrint("Connection lost. Is the Joy-Con connected?", DebugType.ALL);
                 break;
             }
             else
             {
-                DebugPrint("Pause 5ms", DebugType.THREADING);
                 Thread.Sleep((Int32)5);
             }
             ++attempts;
         }
-        DebugPrint("End poll loop.", DebugType.THREADING);
     }
     float[] max = { 0, 0, 0 };
     float[] sum = { 0, 0, 0 };
@@ -365,10 +352,6 @@ public class Joycon
                     {
                         ExtractIMUValues(report_buf, 0);
                     }
-                }
-                if (ts_de == report_buf[1])
-                {
-                    DebugPrint(string.Format("Duplicate timestamp dequeued. TS: {0:X2}", ts_de), DebugType.THREADING);
                 }
                 ts_de = report_buf[1];
                 ts_prev = rep.GetTime();
@@ -597,14 +580,12 @@ public class Joycon
         {
             if (buf_[i] != 0xff)
             {
-                Console.WriteLine("Using user stick calibration data.");
                 found = true;
                 break;
             }
         }
         if (!found)
         {
-            Console.WriteLine("Using factory stick calibration data.");
             buf_ = ReadSPI(0x60, (isLeft ? (byte)0x3d : (byte)0x46), 9); // get user calibration data if possible
         }
         stick_cal[isLeft ? 0 : 2] = (UInt16)((buf_[1] << 8) & 0xF00 | buf_[0]); // X Axis Max above center
@@ -662,6 +643,5 @@ public class Joycon
         {
             tostr += string.Format((arr[0] is byte) ? "{0:X2} " : ((arr[0] is float) ? "{0:F} " : "{0:D} "), arr[i + start]);
         }
-        DebugPrint(string.Format(format, tostr), d);
     }
 }

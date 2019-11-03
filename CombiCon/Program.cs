@@ -33,7 +33,7 @@ namespace CombiCon
             else
             {
                 MessageSender sender = new MessageSender();
-                sender.SendMessageToAll("There has been a failed login attempt at :" + DateTime.Now.ToString() + " \n \n on device: " + System.Environment.MachineName.ToString());
+                sender.SendFailedLoginAttemptMessageToAll();
             } 
 		}
     }

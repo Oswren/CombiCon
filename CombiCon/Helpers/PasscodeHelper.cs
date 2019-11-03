@@ -39,7 +39,7 @@ namespace CombiCon.Helpers
                     Thread.Sleep(15);
             }
 
-            Console.WriteLine("Thank you.");
+            Console.WriteLine("\nPasscode entered.");
 
             return seq;
         }

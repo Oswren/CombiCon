@@ -36,7 +36,7 @@ namespace CombiCon.Helpers
                     break;
                 }
 
-                    Thread.Sleep(10);
+                    Thread.Sleep(15);
             }
 
             Console.WriteLine("Thank you.");

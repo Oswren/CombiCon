@@ -1,0 +1,14 @@
+C:\Source\bugfactory\CombiConML.ConsoleApp\bin\Debug\netcoreapp2.1\MLModel.zip
+C:\Source\bugfactory\CombiConML.ConsoleApp\bin\Debug\netcoreapp2.1\CombiConML.ConsoleApp.deps.json
+C:\Source\bugfactory\CombiConML.ConsoleApp\bin\Debug\netcoreapp2.1\CombiConML.ConsoleApp.runtimeconfig.json
+C:\Source\bugfactory\CombiConML.ConsoleApp\bin\Debug\netcoreapp2.1\CombiConML.ConsoleApp.runtimeconfig.dev.json
+C:\Source\bugfactory\CombiConML.ConsoleApp\bin\Debug\netcoreapp2.1\CombiConML.ConsoleApp.dll
+C:\Source\bugfactory\CombiConML.ConsoleApp\bin\Debug\netcoreapp2.1\CombiConML.ConsoleApp.pdb
+C:\Source\bugfactory\CombiConML.ConsoleApp\bin\Debug\netcoreapp2.1\CombiConML.Model.dll
+C:\Source\bugfactory\CombiConML.ConsoleApp\bin\Debug\netcoreapp2.1\CombiConML.Model.pdb
+C:\Source\bugfactory\CombiConML.ConsoleApp\obj\Debug\netcoreapp2.1\CombiConML.ConsoleApp.csprojAssemblyReference.cache
+C:\Source\bugfactory\CombiConML.ConsoleApp\obj\Debug\netcoreapp2.1\CombiConML.ConsoleApp.AssemblyInfoInputs.cache
+C:\Source\bugfactory\CombiConML.ConsoleApp\obj\Debug\netcoreapp2.1\CombiConML.ConsoleApp.AssemblyInfo.cs
+C:\Source\bugfactory\CombiConML.ConsoleApp\obj\Debug\netcoreapp2.1\CombiConML.ConsoleApp.csproj.CopyComplete
+C:\Source\bugfactory\CombiConML.ConsoleApp\obj\Debug\netcoreapp2.1\CombiConML.ConsoleApp.dll
+C:\Source\bugfactory\CombiConML.ConsoleApp\obj\Debug\netcoreapp2.1\CombiConML.ConsoleApp.pdb

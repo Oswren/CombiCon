@@ -17,8 +17,10 @@ namespace CombiCon
 
         static void Main(string[] args)
         {
-            datasetMaker m = new datasetMaker();
+            DatasetMaker m = new DatasetMaker();
             m.makeCsvFile();
+
+            Environment.Exit(0);
         }
 
         private static void MakeNewPasscode()

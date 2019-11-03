@@ -17,28 +17,16 @@ namespace CombiCon
 
         static void Main(string[] args)
         {
-            while (true)
-            {
-                Console.WriteLine("Welcome to CombiCon login");
-                Console.WriteLine();
-                MenuLoop();
-            }
-
-
-            Account user = new Account(_helper.GenerateSequence());
-            Thread.Sleep(20);
-            List<Vector3> passAttempt = _helper.GenerateSequence();
-            CheckIfPasswordIsCorrect(user, passAttempt);
-
-
-
+            Console.WriteLine("Welcome to CombiCon login");
+            Console.WriteLine();
+            MenuLoop();
         }
 
         private static void MenuLoop()
         {
             Console.WriteLine("Pick an option:");
             Console.WriteLine("1 - Login with combination");
-            Console.WriteLine("2 - Login with shake");
+            Console.WriteLine("--2 - Login with shake-- Not Available Yet");
             Console.WriteLine("3 - Create an account");
             Console.WriteLine("4 - Exit");
             var choice = Console.ReadLine();
@@ -48,9 +36,9 @@ namespace CombiCon
                 case "1":
                     ComboLoginMenu();
                     break;
-                case "2":
-                    ShakeLoginMenu();
-                    break;
+                //case "2":
+                //    ShakeLoginMenu();
+                //    break;
                 case "3":
                     CreateAccountLoginMenu();
                     break;
@@ -66,11 +54,24 @@ namespace CombiCon
 
         private static void ComboLoginMenu()
         {
-            Console.WriteLine("Enter your username");
+            Console.WriteLine("-----Log in with combination-----");
+            Console.WriteLine("Enter your username:");
             var username = Console.ReadLine();
             //get user
+            var user = GetUser(username);
+
+            if (user == null)
+            {
+                Console.WriteLine("Invalid user.");
+                Console.WriteLine("Please try again.");
+                ComboLoginMenu();
+            }
+
             //get passAttempt
-            //checkCombiPassword
+            List<Vector3> passAttempt = _helper.GenerateSequence();
+
+            //check password
+            CheckIfPasswordIsCorrect(user, passAttempt);
         }
 
         private static void ShakeLoginMenu()
@@ -87,18 +88,26 @@ namespace CombiCon
             Console.WriteLine("Enter a username");
             var username = Console.ReadLine();
 
+            List<Vector3> password = _helper.GenerateSequence();
 
-            MakeNewPasscode();
+            AddUser(username, password);
+
+            Console.WriteLine("Account Created.");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("Please sign in.");
+
+            ComboLoginMenu();
         }
 
-
-
-
-        private static void MakeNewPasscode()
+        private static Account GetUser(string username)
         {
-            _savedPass = _helper.GenerateSequence();
-            Thread.Sleep(20);
-            _passAttempt = _helper.GenerateSequence();
+            throw new NotImplementedException();
+        }
+
+        private static void AddUser(string username, List<Vector3> password)
+        {
+            throw new NotImplementedException();
         }
 
         private static void CheckIfPasswordIsCorrect(Account user, List<Vector3> passAttempt)
@@ -106,11 +115,14 @@ namespace CombiCon
             if (user.GenerateSimilarity(passAttempt) <= 0.6)
             {
                 Console.WriteLine("Success! \n You have unlocked your imaginary safe.");
+                Environment.Exit(0);
             }
             else
             {
+                Console.WriteLine("That's not right! Try again.");
                 _messageSender = new MessageSender();
                 _messageSender.SendFailedLoginAttemptMessageToAll();
+                MenuLoop();
             }
         }
     }

@@ -12,6 +12,7 @@ namespace CombiCon
         private static PasscodeHelper _helper = new PasscodeHelper();
         private static List<Vector3> _savedPass;
         private static List<Vector3> _passAttempt;
+        private static MessageSender _messageSender;
 
         static void Main(string[] args)
         {
@@ -34,8 +35,8 @@ namespace CombiCon
             }
             else
             {
-                MessageSender sender = new MessageSender();
-                sender.SendFailedLoginAttemptMessageToAll();
+                _messageSender = new MessageSender();
+                _messageSender.SendFailedLoginAttemptMessageToAll();
             }
         }
     }

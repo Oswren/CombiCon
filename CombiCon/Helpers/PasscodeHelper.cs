@@ -9,6 +9,7 @@ namespace CombiCon.Helpers
     {
         private static JoyconHelper _helper;
         public static Vector3 _position;
+        private double _errorLevel;
   
 
         public PasscodeHelper()
@@ -39,9 +40,24 @@ namespace CombiCon.Helpers
                     Thread.Sleep(15);
             }
 
-            Console.WriteLine("Thank you.");
+            Console.WriteLine("\nPasscode entered.");
 
             return seq;
+        }
+
+        public bool PasswordAttemptIsCorrect(List<Vector3> savedPass, List<Vector3> passAttempt)
+        {
+            _errorLevel = 0;
+
+            for (int i = 0; i < savedPass.Count; i++)
+            {
+                Vector3 delta = passAttempt[i] - savedPass[i];
+                _errorLevel += Math.Sqrt(Math.Pow(delta.X, 2) + Math.Pow(delta.Y, 2) + Math.Pow(delta.Z, 2));
+            }
+
+            var isCorrect = Math.Round(_errorLevel, 2) <= 0.60;
+
+            return isCorrect;
         }
     }
 }

@@ -8,8 +8,8 @@ namespace CombiCon.Communication
 {
     class MessageSender
     {
-        private const String _accountId = "***REMOVED***";
-        private const String _authToken = "***REMOVED***";
+        private const String _accountId = "";
+        private const String _authToken = "";
 
         public MessageSender()
         {
@@ -18,22 +18,22 @@ namespace CombiCon.Communication
 
         public void SendTobyTextMessage(string messageBody)
         {
-            SendTextMessage("***REMOVED***", messageBody);
+            SendTextMessage("", messageBody);
         }
         
         public void SendJoeTextMessage(string messageBody)
         {
-            SendTextMessage("***REMOVED***", messageBody);
+            SendTextMessage("", messageBody);
         }
 
         //public void SendNicoleTextMessage(string messageBody)
         //{
-        //    SendTextMessage("***REMOVED***", messageBody);
+        //    SendTextMessage("", messageBody);
         //}
 
         public void SendConorTextMessage(string messageBody)
         {
-            SendTextMessage("***REMOVED***", messageBody);
+            SendTextMessage("", messageBody);
         }
 
         public void SendFailedLoginAttemptMessageToAll()
@@ -50,14 +50,13 @@ namespace CombiCon.Communication
             SendTobyTextMessage(messageBody);
             SendConorTextMessage(messageBody);
             SendJoeTextMessage(messageBody);
-            //SendNicoleTextMessage(messageBody);
         }
 
         private void SendTextMessage(string targetNumber, string messageBody)
         {
             var message = MessageResource.Create(
                 body: "- \n \n" + messageBody,
-                from: new Twilio.Types.PhoneNumber("***REMOVED***"),
+                from: new Twilio.Types.PhoneNumber(""),
                 to: new Twilio.Types.PhoneNumber(targetNumber));
 
             Console.WriteLine("Notification sent to: " + targetNumber);

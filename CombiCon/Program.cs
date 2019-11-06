@@ -21,8 +21,6 @@ namespace CombiCon
             Console.WriteLine("Welcome to CombiCon login");
             Console.WriteLine();
             MenuLoop();
-
-
         }
 
         private static void MenuLoop()
@@ -116,7 +114,9 @@ namespace CombiCon
             {
                 Console.WriteLine("Oops! Sorry, your attempt was not similar enough.");
                 _messageSender = new MessageSender();
-                _messageSender.SendFailedLoginAttemptMessageToAll();
+                _messageSender.SendTobyTextMessage("There has been a failed login attempt at: " + DateTime.Now.ToString()
+                    + " on device: " + System.Environment.MachineName.ToString()
+                    + "\n\n" + "We thought you'd want to know.\n\n" + "Love, \nCombiCon <3");
                 MenuLoop();
             }
 
@@ -173,24 +173,9 @@ namespace CombiCon
             {
                 Console.WriteLine("That's not right! Try again.");
                 _messageSender = new MessageSender();
-                _messageSender.SendFailedLoginAttemptMessageToAll();
-                MenuLoop();
-            }
-        }
-
-        private static void CheckIfShakePasswordIsCorrect(Account user, List<Vector3> passAttempt)
-        {
-            if (true /*insert check for shake password here*/)
-            {
-                Console.WriteLine("Success! \n You have unlocked your imaginary safe.");
-                Console.ReadLine();
-                Environment.Exit(0);
-            }
-            else
-            {
-                Console.WriteLine("That's not right! Try again.");
-                _messageSender = new MessageSender();
-                _messageSender.SendFailedLoginAttemptMessageToAll();
+                _messageSender.SendTobyTextMessage("There has been a failed login attempt at: " + DateTime.Now.ToString()
+                    + " on device: " + System.Environment.MachineName.ToString()
+                    + "\n\n" + "We thought you'd want to know.\n\n" + "Love, \nCombiCon <3");
                 MenuLoop();
             }
         }

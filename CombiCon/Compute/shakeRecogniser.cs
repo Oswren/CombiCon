@@ -34,14 +34,8 @@ namespace CombiCon.Compute
             Console.WriteLine(numOfDirectionChangesForPassword.Count.ToString());
             Console.WriteLine(numOfDirectionChangesForAttempt.Count.ToString());
 
-            if ((numOfDirectionChangesForAttempt.Count) < (numOfDirectionChangesForPassword.Count * 1.2) && (numOfDirectionChangesForAttempt.Count) > (numOfDirectionChangesForPassword.Count * 0.8))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return ((numOfDirectionChangesForAttempt.Count) < (numOfDirectionChangesForPassword.Count * 1.2) && 
+                (numOfDirectionChangesForAttempt.Count) > (numOfDirectionChangesForPassword.Count * 0.8));
         }
 
         // Method to load single row of dataset to try a single prediction
